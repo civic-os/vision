@@ -1,5 +1,5 @@
 # Civic OS: Open Source Software to Empower Open Governance
-Last Revised 2023-08-29
+Last Revised 2023-08-30
 
 ## Contact
 For more information, or to collaborate, contact [Dan Kurin](mailto:dkurin@swiftlet.technology)
@@ -42,3 +42,5 @@ The Civic OS software is designed to maximize civic benefit, which should direct
 ### Decision-making
 
 ## Technical Implementation
+### User Experience
+### Software Architecture

@@ -33,16 +33,35 @@ This software is created to allow any organization to setup and administer their
 
 # Abstractions
 To accommodate breaking a system into components, we propose the following abstractions. Every abstraction can be thought of as a computing primitive (in the vein of a "File" or "Folder") which may have configurable properties, but can be represented by a graph or diagram to visually represent its construction. These graphs are a key enabler to bridge the gap between technical and non-technical ideas and persons.
+## Example
+To illustrate how these abstractions work together to build a complete system, this paper will use an example system built to manage pothole complaints: **The Pot Hole Observation (PHO) system**.
+
+The PHO system allows a citizen to report a road issue to their local government and see as the issue is resolved. PHO also allows the road commission to track each issue, assign work, and collect issues into a bid. Following Open Data principles, the original reporter can see the status of their issue.
 ## Schema
 A Schema is a structured set of information in a tabular form (having multiple records of the same type). A single schema comprises a collection of fields, each with a type (text, number, money, etc.) and relationships to other schemas or nested sub-schemas. Validity rules are also configurable to enforce data input and preserve data integrity (e.g. `Location` is required, or `End Date` must be after `Start Date`).
 
 Every Schema is described by an Entity Relationship Diagram.
 ```mermaid
 erDiagram
+    Issue {
+        user SubmittingUser
+        datetime Created
+        datetime Updated
+        geo-location IssueLocation
+        text Comment
+        photo Photo
+        status Status
+        user ResponsibleUser
+    }
 
 ```
+### Example
+A local resident notices a large pothole forming in front of their house and decides to do something about it. They log in to PHO with their Facebook account and are presented with a map allowing them to designate the location of the pothole. They add some comments or a photo and create the `Issue`. The issue's `Status` is automatically set to `New`.
+
+
+### Properties
 Every Schema may have a number of configurable properties that alter its behavior.
-### Permissions
+#### Permissions
 Permissions define who can view records and who can edit records. For example:
 - Functional permissions
   - Owner of record can edit
@@ -50,14 +69,20 @@ Permissions define who can view records and who can edit records. For example:
 - Role-based permissions
   - Members of the `Road Crew` role can view `Work Order` records
   - Members of the `Dispatch` role can create `Schedule` records
-### Audit Log
+#### Audit Log
 When a record is updated, a log is automatically created to note the changed values as well as the user who made the update.
-### Search
+#### Search
 Specific fields may be configured to make records easily searchable.
+#### Data Sharing Management
+Create and manage data access leases. These can be time-limited and assigned to particular users and organizations to allow read and/or write access to specific schemas.
+- For-profit companies to build plugins, extensions, or services
+- Government Agencies to facilitate data-sharing
+- Non-profits for academic research 
 ## Workflow
 
 ## Events/Triggers
-
+### Example
+- The `Submitting User` should be notified whenever the status of their `Issue` changes
 
 # Governance
 The Civic OS software is designed to maximize civic benefit, which should direct the legal structure of the supporting organization. This organization has not yet been formed, but we believe that a non-profit or Public Benefit Corp. will provide the best opportunities to mature and spread the use of Civic OS.

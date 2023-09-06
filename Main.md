@@ -42,7 +42,7 @@ To illustrate how these abstractions work together to build a complete system, t
 
 The PHO system allows a citizen to report a road issue to their local government and see as the issue is resolved. PHO also allows the road commission to track each issue, assign work, and collect issues into a bid. Following Open Data principles, the original reporter can see the status of their issue.
 ## Abstraction: Schema
-A Schema is a structured set of information in a tabular form (having multiple records of the same type). A single schema comprises a collection of fields, each with a type (text, number, money, etc.) and relationships to other schemas or nested sub-schemas. Validity rules are also configurable to enforce data input and preserve data integrity (e.g. `Location` is required, or `End Date` must be after `Start Date`).
+A Schema is a structured set of information in a tabular form (having multiple records of the same type). A single schema comprises a collection of fields, each with a type (text, number, money, etc.) and relationships to other schemas or nested sub-schemas. Validity rules are also configurable to enforce data input and preserve data integrity.
 
 Every Schema is described by an Entity Relationship Diagram.
 ```mermaid
@@ -72,6 +72,8 @@ A local resident notices a large pothole forming in front of their house and dec
 Once Road Crew member verifies the issue, they create a `WorkDetail` record. The `WorkDetail` is connected to a specific `Issue` and includes more technical details than the reporting resident could provide: Volume of the hole, repair estimate, and additional photos. Zero or One `WorkDetail` records exist for each `Issue`.
 ### Properties
 Every Schema may have a number of configurable properties that alter its behavior.
+#### Record Validation
+Each Schema may have any number of rules to enforce that the entered information meets some criteria. These rules may be as simple as marking a field as Required (e.g. `Location`), forcing one value to be greater than another (`End Date` must be after `Start Date`), or depend on other fields (`ResponsibleUser` is required if `Status` is `Verification`; see [Workflow: Allowed States](#allowed-states)).
 #### Permissions
 Permissions define who can view records and who can edit records. For example:
 - Functional permissions
@@ -108,7 +110,8 @@ stateDiagram-v2
 	Verification --> RepairQueue
 	Verification --> Duplicate
 	RepairQueue --> BatchedForQuote
-	RepairQueue --> Verification
+	RepairQueue --> ReEstimate
+	ReEstimate --> Verification
 	BatchedForQuote --> BidAccepted
 	BidAccepted --> Completed
 	Completed --> [*]
@@ -119,7 +122,7 @@ New `Issues` are created with the `New` Status. When the `Issue` is assigned to 
 
 Once the `Issue` is Verified, it is either moved to the `RepairQueue` state or the `Duplicate` state in the event multiple residents reported the same `Issue`.
 
-If enough time passes (or a mistake is believed), the `Issue` may be moved back to the `Verification` state. This transition is explicitly allowed by the system design and represented on the State Diagram.
+If enough time passes (or a mistake is believed), the `Issue` may be moved back to the `Verification` state by way of the `ReEstimate` state. This transition is explicitly allowed by the system design and represented on the State Diagram.
 
 In this community, road repairs are bid out to contractors. When a particular threshold of work is met, a batch of `Issues` are packaged into a single Request For Quote (RFQ). Each of those `Issues` is moved to the `BatchedForQuote` state.
 
@@ -128,11 +131,16 @@ Similarly, when the Bid is accepted, each `Issue` state is updated to reflect th
 Finally, when the contractor has completed the work, each `Issue` in the batch is updated to reflect the `Completed` status.
 ### Properties
 #### Allowed States
+Workflow States are constrained to a pre-defined list of States and new States can not be created by ordinary users. In a well-designed system, this constraint clarifies the intended process and eases analysis of the data present in the system.
 
+Allowed States can also be combined with [Schema: Record Validation](#record-validation) to ensure particular fields are filled at certain points in the process.
 #### Allowed Transitions
+Illustrated as arrows in the State Diagram, valid transitions are enforced and represent pathways for information to move through the given process. This design tool gives varying participants the confidence that information is ready for action when it is present in a particular state.
+## Abstraction: Triggers
+A great many systems could be created using the `Schema` and `Workflow` abstractions, but additional abstraction is needed in order to accommodate a further level of complexity. Through a conditional `Trigger` system, Schema Records may be created or modified based on prescribed Schema conditions.
 
-
-## Abstraction: Events/Triggers
+`Triggers` are described by programming blocks in the format popularized by the [Scratch](https://www.scratchfoundation.org/) programming language.
+<!-- Consider using Snap instead of Scratch https://snap.berkeley.edu/ -->
 ### Example
 - The `Submitting User` should be notified whenever the status of their `Issue` changes
 - When a `Bid` is accepted, update the status of any associated `Issues`

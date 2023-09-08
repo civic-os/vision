@@ -64,12 +64,30 @@ erDiagram
 		datetime VerifiedOn
 		photo AdditionalPhotos
 	}
-	Issue ||--o| WorkDetail : Verifies
+	Issue ||--o| WorkDetail : "Verified By"
+	WorkPackage {
+		text Name
+		datetime QuoteDueDate
+		issues IssuesContained
+		status Status
+	}
+	Issue }|--|| WorkPackage : "Contained In"
+	Bid {
+		user Owner
+		datetime StartDate
+		datetime EndDate
+		money TotalCost
+	}
+	WorkPackage ||--|{ Bid : "Addressed By"
 ```
 ### Example
 A local resident notices a large pothole forming in front of their house and decides to do something about it. They log in to PHO with their Facebook account and are presented with a map allowing them to designate the location of the pothole. They add some comments or a photo and create the `Issue`. The issue's `Status` is automatically set to `New`.
 
 Once Road Crew member verifies the issue, they create a `WorkDetail` record. The `WorkDetail` is connected to a specific `Issue` and includes more technical details than the reporting resident could provide: Volume of the hole, repair estimate, and additional photos. Zero or One `WorkDetail` records exist for each `Issue`.
+
+A `WorkPackage` is created to address a set of `Issues`.
+
+The road commission solicits `Bids` for each `WorkPackage`.
 ### Properties
 Every Schema may have a number of configurable properties that alter its behavior.
 #### Record Validation
@@ -140,10 +158,14 @@ Illustrated as arrows in the State Diagram, valid transitions are enforced and r
 A great many systems could be created using the `Schema` and `Workflow` abstractions, but additional abstraction is needed in order to accommodate a further level of complexity. Through a conditional `Trigger` system, Schema Records may be created or modified based on prescribed Schema conditions.
 
 `Triggers` are described by programming blocks in the format popularized by the [Scratch](https://www.scratchfoundation.org/) programming language.
-<!-- Consider using Snap instead of Scratch https://snap.berkeley.edu/ -->
-### Example
-- The `Submitting User` should be notified whenever the status of their `Issue` changes
-- When a `Bid` is accepted, update the status of any associated `Issues`
+<!-- Consider using Snap! https://snapextensions.uni-goettingen.de/ or Blockly https://github.com/nicolaipoehner/blocklysql instead of Scratch -->
+### Examples
+| Description | Block Diagram |
+|--|--|
+| The `Submitting User` should be notified whenever the status of their `Issue` changes | [![](images/scratchblocks-1.png)](http://scratchblocks.github.io/#?style=scratch3&script=When%20%5BIssue%20v%5D%20is%20updated%3A%3A%20events%20hat%0ASend%20Notification%20to%20%5BSubmittingUser%20v%5D%0A) |
+| When 100 `Issues` are in the `RepairQueue` status, open a new `Bid` | [![](images/scratchblocks-2.png)](http://scratchblocks.github.io/#?style=scratch3&script=When%20%5BIssue%20v%5D%20is%20updated%3A%3A%20events%20hat%0AIf%20%3CCount%5BIssue%20v%5D%20Where%20Status%20%3D%5BRepairQueue%20v%5D%20%5C%3E%20(100)%3E%20then%0A%09New%20%5BWorkPackage%20v%5D%20named%20%5BSummer%5D%3A%3Amotion%0A%09Set%20%5BSummer%5D%20%5BIssuesContained%20v%5D%20to%20%7B%0A%09%09Get%20All%20%5BIssue%20v%5D%0A%09%09Where%20%5BStatus%20v%5D%20is%20%5BRepairQueue%5D%0A%09%7D%3A%3Amotion%0A%09For%20Each%20%5BSummer%20v%5D.%5BIssuesContained%20v%5D%20%7B%0A%09%09Set%20%5BStatus%20v%5D%20to%20%5BBatchedForQuote%5D%3A%3Amotion%0A%09%7D%0Aend%0A) |
+| When a `Bid` is accepted, update the status of any `Issues` associated to the appropriate `WorkPackage` | [![](images/scratchblocks-3.png)](http://scratchblocks.github.io/#?style=scratch3&script=When%20%5BWorkPackage%20v%5D%20is%20updated%3A%3A%20events%20hat%0ASet%20%5BCurrentPackage%5D%20to%20%5BUpdatedObject%20v%5D%3A%3Amotion%0AIf%20%3C%5BCurrentPackage%20v%5D's%20Status%20is%20%5BBidAccepted%5D%3E%20then%0A%09For%20Each%20%5BCurrentPackage%20v%5D.%5BIssuesContained%20v%5D%20%7B%0A%09%09Set%20%5BStatus%20v%5D%20to%20%5BBidAccepted%5D%3A%3Amotion%0A%09%7D%0Aend%0A) |
+
 
 # Governance
 The Civic OS software is designed to maximize civic benefit, which should direct the legal structure of the supporting organization. This organization has not yet been formed, but we believe that a non-profit or Public Benefit Corp. will provide the best opportunities to mature and spread the use of Civic OS.

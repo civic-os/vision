@@ -1,5 +1,5 @@
 # Civic OS: Open Source Software to Empower Open Governance
-Last Revised 2023-09-04
+Last Revised 2023-09-07
 
 ## Contact
 For more information, or to collaborate, contact [Dan Kurin](mailto:dkurin@swiftlet.technology)
@@ -169,9 +169,11 @@ A great many systems could be created using the `Schema` and `Workflow` abstract
 
 # Governance
 The Civic OS software is designed to maximize civic benefit, which should direct the legal structure of the supporting organization. This organization has not yet been formed, but we believe that a non-profit or Public Benefit Corp. will provide the best opportunities to mature and spread the use of Civic OS.
-## Decision-making
 
+## Decision-making
+In order to serve the broadest cross-section of government entities, it is critical that all members opinions are represented in development and strategic discussions.
 ## Representation
+A board of advisors will be created consisting of volunteers from large, medium, and small agencies. Different types of agencies will also be considered (City, Township, County, Regional Authority, Transit Authority, State, etc.). Representatives will serve a fixed term and new representatives will be selected on a rotating schedule.
 
 # Technical Implementation
 ## User Experience

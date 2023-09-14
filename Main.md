@@ -114,7 +114,7 @@ A particular User or Role may configure a list of Schemas that meet certain crit
 - A member of the Road Crew may wish to see all Issues assigned to them.
 - A supervisor may wish to see all Issues with the Verification Status
 ## Abstraction: Workflow
-A workflow is a constraint placed upon a Schema that controls certain aspects of the data stored in the Schema. In order to create a Workflow, one property of the Schema must be designated to represent the Schema's State, usually with a set of pre-defined values.
+A workflow constrains a Schema to control certain aspects of the data stored in the Schema. In order to create a Workflow, one property of the Schema must be designated to represent the Schema's State, usually with a set of pre-defined values.
 
 Every Workflow is defined by a State Diagram:
 ```mermaid

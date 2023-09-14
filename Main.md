@@ -1,5 +1,5 @@
 # Civic OS: Open Source Software to Empower Open Governance
-Last Revised 2023-09-07
+Last Revised 2023-09-14
 
 ## Contact
 For more information, or to collaborate, contact [Dan Kurin](mailto:dkurin@swiftlet.technology)
@@ -178,3 +178,4 @@ A board of advisors will be created consisting of volunteers from large, medium,
 # Technical Implementation
 ## User Experience
 ## Software Architecture
+The inspiration behind this architecture is SQL and its declarative model. When you write SQL scripts, you are telling the database engine _what_ you want, not _how_ you want the engine to do it. This is a very powerful mental model and can allow the system to bridge the gap between non-technical personnel and very technical systems.

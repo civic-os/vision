@@ -4,29 +4,6 @@ Last Revised 2023-09-14
 ## Contact
 For more information, or to collaborate, contact [Dan Kurin](mailto:dkurin@swiftlet.technology)
 
-# Guiding Principles
-## Open Government
-Transparency and accountability are foundational to successful democratic governance. In order for citizens to be informed, they must have ready access to information to make good decisions about who to support, and how to vote in elections and on referenda.
-
-In Civic OS, accountability is achieved by enforcing the justification of decisions; in other words, forcing leaders to justify key decisions. In order for an individual to decide if he supports an action, he must be able to understand the rationale behind that decision.
-## Open Data
-All data is not created equal. In order to make data open and usable the Open Data Charter has published [6 key
-principles](https://opendatacharter.net/principles/):
-- Open By Default
-- Timely and Comprehensive
-- Accessible and Usable
-- Comparable and Interoperable
-- For Improved Governance & Citizen Engagement
-- For Inclusive Development and Innovation
-
-Civic OS supports these principles by enforcing structured data and automatically creating Application Program Interfaces (APIs) to provide appropriate access to the stored data.
-## Open Source
-The term “open source” can have a number of meanings but Civic OS uses the definition consistent with “free software” according to the [Free Software Foundation](https://www.fsf.org/about/what-is-free-software).
-
-The two primary outcomes of this philosophy are democratic development and lower cost of entry. Democratic development allows entities to contribute to development (in code, financial, and administrative contributions) to influence the system’s evolution. This results in a system that is useful for a broad range of diverse organizations. Lower cost of entry is realized by the $0 licensing fees inherent in Free/Open Source software. When development is performed in the open, the cost is shared by an entire community.
-
-Software Licensing is a complex issue with many, diverse opinions. It is the author's opinion that software employed by governments best serve the public interest when their development is required to be shared with the community (as in AGPL) rather than value captured by private corporations.
-
 # Goals
 ## Raise the level of abstraction
 We believe that most information systems or processes can be abstracted in a way that a non-technical person can describe it if provided with the right tools. Similarly, the system for storing this information should allow that same non-technical person to understand and (most critically) contribute to the system's creation.
@@ -166,16 +143,3 @@ A great many systems could be created using the `Schema` and `Workflow` abstract
 | When 100 `Issues` are in the `RepairQueue` status, open a new `Bid` | [![](images/scratchblocks-2.png)](http://scratchblocks.github.io/#?style=scratch3&script=When%20%5BIssue%20v%5D%20is%20updated%3A%3A%20events%20hat%0AIf%20%3CCount%5BIssue%20v%5D%20Where%20Status%20%3D%5BRepairQueue%20v%5D%20%5C%3E%20(100)%3E%20then%0A%09New%20%5BWorkPackage%20v%5D%20named%20%5BSummer%5D%3A%3Amotion%0A%09Set%20%5BSummer%5D%20%5BIssuesContained%20v%5D%20to%20%7B%0A%09%09Get%20All%20%5BIssue%20v%5D%0A%09%09Where%20%5BStatus%20v%5D%20is%20%5BRepairQueue%5D%0A%09%7D%3A%3Amotion%0A%09For%20Each%20%5BSummer%20v%5D.%5BIssuesContained%20v%5D%20%7B%0A%09%09Set%20%5BStatus%20v%5D%20to%20%5BBatchedForQuote%5D%3A%3Amotion%0A%09%7D%0Aend%0A) |
 | When a `Bid` is accepted, update the status of any `Issues` associated to the appropriate `WorkPackage` | [![](images/scratchblocks-3.png)](http://scratchblocks.github.io/#?style=scratch3&script=When%20%5BWorkPackage%20v%5D%20is%20updated%3A%3A%20events%20hat%0ASet%20%5BCurrentPackage%5D%20to%20%5BUpdatedObject%20v%5D%3A%3Amotion%0AIf%20%3C%5BCurrentPackage%20v%5D's%20Status%20is%20%5BBidAccepted%5D%3E%20then%0A%09For%20Each%20%5BCurrentPackage%20v%5D.%5BIssuesContained%20v%5D%20%7B%0A%09%09Set%20%5BStatus%20v%5D%20to%20%5BBidAccepted%5D%3A%3Amotion%0A%09%7D%0Aend%0A) |
 
-
-# Governance
-The Civic OS software is designed to maximize civic benefit, which should direct the legal structure of the supporting organization. This organization has not yet been formed, but we believe that a non-profit or Public Benefit Corp. will provide the best opportunities to mature and spread the use of Civic OS.
-
-## Decision-making
-In order to serve the broadest cross-section of government entities, it is critical that all members opinions are represented in development and strategic discussions.
-## Representation
-A board of advisors will be created consisting of volunteers from large, medium, and small agencies. Different types of agencies will also be considered (City, Township, County, Regional Authority, Transit Authority, State, etc.). Representatives will serve a fixed term and new representatives will be selected on a rotating schedule.
-
-# Technical Implementation
-## User Experience
-## Software Architecture
-The inspiration behind this architecture is SQL and its declarative model. When you write SQL scripts, you are telling the database engine _what_ you want, not _how_ you want the engine to do it. This is a very powerful mental model and can allow the system to bridge the gap between non-technical personnel and very technical systems.

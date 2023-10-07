@@ -1,4 +1,5 @@
 # Guiding Principles
+Last Revised 2023-10-07
 ## Open Government
 Transparency and accountability are foundational to successful democratic governance. In order for citizens to be informed, they must have ready access to information to make good decisions about who to support, and how to vote in elections and on referenda.
 

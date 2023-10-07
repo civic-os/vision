@@ -1,8 +1,13 @@
 # Civic OS: Open Source Software to Empower Open Governance
-Last Revised 2023-09-14
+Last Revised 2023-10-07
 
 ## Contact
 For more information, or to collaborate, contact [Dan Kurin](mailto:dkurin@swiftlet.technology)
+
+## Go Deeper
+Also see:
+- [Guiding Principles](GuidingPrinciples.md)
+- [Technical Architecture](TechnicalArchitecture.md)
 
 # Goals
 ## Raise the level of abstraction

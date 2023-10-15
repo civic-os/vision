@@ -1,5 +1,5 @@
 # Civic OS: Open Source Software to Empower Open Governance
-Last Revised 2023-10-07
+Last Revised 2023-10-15
 
 ## Contact
 For more information, or to collaborate, contact [Dan Kurin](mailto:dkurin@swiftlet.technology)
@@ -136,10 +136,10 @@ Workflow States are constrained to a pre-defined list of States and new States c
 Allowed States can also be combined with [Schema: Record Validation](#record-validation) to ensure particular fields are filled at certain points in the process.
 #### Allowed Transitions
 Illustrated as arrows in the State Diagram, valid transitions are enforced and represent pathways for information to move through the given process. This design tool gives varying participants the confidence that information is ready for action when it is present in a particular state.
-## Abstraction: Triggers
-A great many systems could be created using the `Schema` and `Workflow` abstractions, but additional abstraction is needed in order to accommodate a further level of complexity. Through a conditional `Trigger` system, Schema Records may be created or modified based on prescribed Schema conditions.
+## Abstraction: Logic
+A great many systems could be created using the `Schema` and `Workflow` abstractions, but additional abstraction is needed in order to accommodate a further level of complexity. Through a conditional `Logic` system, Schema Records may be created or modified based on prescribed Schema conditions.
 
-`Triggers` are described by programming blocks in the format popularized by the [Scratch](https://www.scratchfoundation.org/) programming language.
+`Logic` is described by programming blocks in the format popularized by the [Scratch](https://www.scratchfoundation.org/) programming language.
 <!-- Consider using Snap! https://snapextensions.uni-goettingen.de/ or Blockly https://github.com/nicolaipoehner/blocklysql instead of Scratch -->
 ### Examples
 | Description | Block Diagram |

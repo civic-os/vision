@@ -1,5 +1,5 @@
 # Civic OS: Open Source Software to Empower Open Governance
-Last Revised 2023-10-15
+Last Revised 2023-10-26
 
 ## Contact
 For more information, or to collaborate, contact [Dan Kurin](mailto:dkurin@swiftlet.technology)
@@ -142,9 +142,47 @@ A great many systems could be created using the `Schema` and `Workflow` abstract
 `Logic` is described by programming blocks in the format popularized by the [Scratch](https://www.scratchfoundation.org/) programming language.
 <!-- Consider using Snap! https://snapextensions.uni-goettingen.de/ or Blockly https://github.com/nicolaipoehner/blocklysql instead of Scratch -->
 ### Examples
-| Description | Block Diagram |
-|--|--|
-| The `Submitting User` should be notified whenever the status of their `Issue` changes | [![](images/scratchblocks-1.png)](http://scratchblocks.github.io/#?style=scratch3&script=When%20%5BIssue%20v%5D%20is%20updated%3A%3A%20events%20hat%0ASend%20Notification%20to%20%5BSubmittingUser%20v%5D%0A) |
-| When 100 `Issues` are in the `RepairQueue` status, open a new `Bid` | [![](images/scratchblocks-2.png)](http://scratchblocks.github.io/#?style=scratch3&script=When%20%5BIssue%20v%5D%20is%20updated%3A%3A%20events%20hat%0AIf%20%3CCount%5BIssue%20v%5D%20Where%20Status%20%3D%5BRepairQueue%20v%5D%20%5C%3E%20(100)%3E%20then%0A%09New%20%5BWorkPackage%20v%5D%20named%20%5BSummer%5D%3A%3Amotion%0A%09Set%20%5BSummer%5D%20%5BIssuesContained%20v%5D%20to%20%7B%0A%09%09Get%20All%20%5BIssue%20v%5D%0A%09%09Where%20%5BStatus%20v%5D%20is%20%5BRepairQueue%5D%0A%09%7D%3A%3Amotion%0A%09For%20Each%20%5BSummer%20v%5D.%5BIssuesContained%20v%5D%20%7B%0A%09%09Set%20%5BStatus%20v%5D%20to%20%5BBatchedForQuote%5D%3A%3Amotion%0A%09%7D%0Aend%0A) |
-| When a `Bid` is accepted, update the status of any `Issues` associated to the appropriate `WorkPackage` | [![](images/scratchblocks-3.png)](http://scratchblocks.github.io/#?style=scratch3&script=When%20%5BWorkPackage%20v%5D%20is%20updated%3A%3A%20events%20hat%0ASet%20%5BCurrentPackage%5D%20to%20%5BUpdatedObject%20v%5D%3A%3Amotion%0AIf%20%3C%5BCurrentPackage%20v%5D's%20Status%20is%20%5BBidAccepted%5D%3E%20then%0A%09For%20Each%20%5BCurrentPackage%20v%5D.%5BIssuesContained%20v%5D%20%7B%0A%09%09Set%20%5BStatus%20v%5D%20to%20%5BBidAccepted%5D%3A%3Amotion%0A%09%7D%0Aend%0A) |
+| Name | Description | Block Diagram |
+|--|--|--|
+| **Notify Submitter when Status changes** | The `Submitting User` should be notified whenever the status of their `Issue` changes | [![](images/scratchblocks-1.png)](http://scratchblocks.github.io/#?style=scratch3&script=When%20%5BIssue%20v%5D%20is%20updated%3A%3A%20events%20hat%0ASend%20Notification%20to%20%5BSubmittingUser%20v%5D%0A) |
+| **Batch Repairs for Bid** | When 100 `Issues` are in the `RepairQueue` status, open a new `Bid` | [![](images/scratchblocks-2.png)](http://scratchblocks.github.io/#?style=scratch3&script=When%20%5BIssue%20v%5D%20is%20updated%3A%3A%20events%20hat%0AIf%20%3CCount%5BIssue%20v%5D%20Where%20Status%20%3D%5BRepairQueue%20v%5D%20%5C%3E%20(100)%3E%20then%0A%09New%20%5BWorkPackage%20v%5D%20named%20%5BSummer%5D%3A%3Amotion%0A%09Set%20%5BSummer%5D%20%5BIssuesContained%20v%5D%20to%20%7B%0A%09%09Get%20All%20%5BIssue%20v%5D%0A%09%09Where%20%5BStatus%20v%5D%20is%20%5BRepairQueue%5D%0A%09%7D%3A%3Amotion%0A%09For%20Each%20%5BSummer%20v%5D.%5BIssuesContained%20v%5D%20%7B%0A%09%09Set%20%5BStatus%20v%5D%20to%20%5BBatchedForQuote%5D%3A%3Amotion%0A%09%7D%0Aend%0A) |
+| **Bid accepted updates Issues** | When a `Bid` is accepted, update the status of any `Issues` associated to the appropriate `WorkPackage` | [![](images/scratchblocks-3.png)](http://scratchblocks.github.io/#?style=scratch3&script=When%20%5BWorkPackage%20v%5D%20is%20updated%3A%3A%20events%20hat%0ASet%20%5BCurrentPackage%5D%20to%20%5BUpdatedObject%20v%5D%3A%3Amotion%0AIf%20%3C%5BCurrentPackage%20v%5D's%20Status%20is%20%5BBidAccepted%5D%3E%20then%0A%09For%20Each%20%5BCurrentPackage%20v%5D.%5BIssuesContained%20v%5D%20%7B%0A%09%09Set%20%5BStatus%20v%5D%20to%20%5BBidAccepted%5D%3A%3Amotion%0A%09%7D%0Aend%0A) |
+### Relationships
+Systems like this, linked together by a series of background actions, can be difficult to manage. It is imperative that the user is able to visualize relationships between Entities, especially when one action may cause another.  We propose a navigable diagram system showing how Logic relates one Entity to another.
 
+As an example, consider the above Logic block "**Batch Repairs for Bid**". This diagram shows that the Logic reads from the `Issue` Entity, is triggered by changes to the `Issue` Entity, and writes to both the `Issue` and `WorkPackage` Entities:
+```mermaid
+flowchart LR
+    subgraph Read
+    direction LR
+        Issue1[Issue]
+    end
+    subgraph Trigger[Logic]
+        direction TB
+        Issue2[Issue] -- Triggers --> Logic{{Batch Repairs for Bid}}
+
+    end
+    subgraph Write
+        direction LR
+        Issue3[Issue]
+        Package[WorkPackage]
+    end
+    Read --> Trigger
+    Trigger  --> Write
+```
+Similarly, the user may view the logic connected to an Entity:
+```mermaid
+flowchart TB
+	subgraph Writes[Writes To Entity]
+		Batch1{{Batch Repairs for Bid}}
+		BidAccepted{{Bid accepted updates Issues}}
+	end
+	subgraph Entity
+		Issue
+	end
+	subgraph Reads[Reads From Entity]
+		Batch2{{Batch Repairs for Bid}}
+		Notify{{Notify Submitter when Status changes}}
+	end
+	Writes --> Entity --> Reads
+```

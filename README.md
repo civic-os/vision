@@ -1,5 +1,7 @@
 # Civic OS: Open Source Software to Empower Open Governance
-Last Revised 2023-10-26
+Civic OS is a low/no-code software platform which allows government agencies to build and tailor their own information systems and logic without writing code.
+
+This document last revised 2023-11-15
 
 ## Contact
 For more information, or to collaborate, contact [Dan Kurin](mailto:dkurin@swiftlet.technology)
@@ -9,16 +11,20 @@ Also see:
 - [Guiding Principles](GuidingPrinciples.md)
 - [Technical Architecture](TechnicalArchitecture.md)
 
-# Goals
+# Project Goals
 ## Raise the level of abstraction
 We believe that most information systems or processes can be abstracted in a way that a non-technical person can describe it if provided with the right tools. Similarly, the system for storing this information should allow that same non-technical person to understand and (most critically) contribute to the system's creation.
+
+Civic OS provides the platform for automatically translating concepts and ideas into a concrete structure that handles the most common tasks of information management: Definition, Input, and Display.
 ## Tools, not Products
-Civic OS is a tool designed to allow experts in the information domain to create and maintain information systems without writing software code. As such, the system will not be complete without input from the organization operating the system but rather a completed system is created using Civic OS.
+Just as no single community is identical to another, no government agency's needs are 100% identical to another. Civic OS is a _tool_ designed to allow experts in the information domain (those familiar with the information managed) to create and maintain information systems without writing software code. As such, the system will not be complete without input from the organization operating the system but rather a completed system is created using Civic OS.
+
+Where similarities exist, templates may be shared within a community of users to ease the burden of creating systems from nothing.
 ## Runs anywhere
 This software is created to allow any organization to setup and administer their own instance of the application. You own the data and the software.
 
 # Abstractions
-To accommodate breaking a system into components, we propose the following abstractions. Every abstraction can be thought of as a computing primitive (in the vein of a "File" or "Folder") which may have configurable properties, but can be represented by a graph or diagram to visually represent its construction. These graphs are a key enabler to bridge the gap between technical and non-technical ideas and persons.
+To accommodate breaking an information system into components, we propose the following abstractions. Every abstraction can be thought of as a computing primitive (in the vein of a "File" or "Folder") which may have configurable properties, but can be represented by a graph or diagram to visually represent its construction. These graphs are a key enabler to bridge the gap between technical and non-technical ideas and persons.
 ## Example
 To illustrate how these abstractions work together to build a complete system, this paper will use an example system built to manage pothole complaints: **The Pot Hole Observation (PHO) system**.
 

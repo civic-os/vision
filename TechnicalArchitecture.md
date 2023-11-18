@@ -17,8 +17,8 @@ flowchart TD
     end
     forms -- GraphQL --> GraphQL
     tables -- GraphQL --> GraphQL
-    forms --> meta
-    tables --> meta
+    forms -- Metadata --> meta
+    tables -- Metadata --> meta
     workflow --> workflowService
     logic --> logicService
     maps --> gisService
@@ -49,7 +49,7 @@ The Postgres community has also developed plugins for:
 ### Authentication
 Authenticates a user's identity and issues a JSON Web Token (JWT) bearing the user's unique ID. All other services will validate this JWT and inject the unique ID for use with PostgreSQL's Row-Level Security.
 ### GraphQL
-### Metadata
+### [Metadata](https://github.com/civic-os/metadata-service)
 Shares information about schema (data structure and validation) with the frontend. Allows automatic generation of Forms and Tables.
 
 This service also enables configurable views such as menus and field ordering.

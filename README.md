@@ -1,7 +1,7 @@
 # Civic OS: Open Source Software to Empower Open Governance
 Civic OS is a low/no-code software platform which allows government agencies to build and tailor their own information systems and logic without writing code.
 
-This document last revised 2023-11-15
+This document last revised 2024-01-20
 
 ## Contact
 For more information, or to collaborate, contact [Dan Kurin](mailto:dkurin@swiftlet.technology)
@@ -192,3 +192,11 @@ flowchart TB
 	end
 	Writes --> Entity --> Reads
 ```
+
+# Development Strategy
+## Phase 1: Development Tools
+In Phase 1, development is focused on tools to speed software development. These are tools like automated pages/forms or templated database tables. During this phase, the core abstractions will be established, encoded, and documented.
+## Phase 2: Introspection Tools
+In Phase 2, tools will be created which give non-technical users insight into the workings of the system. This will happen primarily through automatically-generated diagrams (Entity Relationship, Workflow, Code Blocks) which allows users to understand the design and operation of the created system.
+## Phase 3: Graphical Editing Tools
+Phase 3 builds on the prior phases by allowing users to interact with the Phase 2 diagrams allowing them to change the design and behavior of the created system.
